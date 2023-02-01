@@ -19,6 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+Route::get('/plist', 'ProductController@list')->name('plist');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/register', 'ProductController@register')->name('register');
