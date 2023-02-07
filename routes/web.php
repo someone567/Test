@@ -20,5 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/plist', 'ProductController@list')->name('plist');
-
+/*
 Route::get('/register', 'ProductController@register')->name('register');
+*/
+Route::get('/register', 'ProductController@showRegistForm')->name('register');
+Route::post('/register', 'ProductController@registSubmit')->name('submit');

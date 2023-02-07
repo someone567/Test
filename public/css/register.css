@@ -1,0 +1,29 @@
+.btn-default {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto;
+    padding: 1em 2em;
+    width: 100px;
+    height: 20px;
+    color: #333;
+    font-size: 15px;
+    font-weight: 500;
+    background-color: #cccccc;
+    transition: 0.3s;
+}
+
+.btn-default a::after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-top: 3px solid #333333;
+    border-right: 3px solid #333333;
+    transform: rotate(45deg);
+}
+
+.btn-default a:hover {
+    text-decoration: none;
+    background-color: #bbbbbb;
+
+}
