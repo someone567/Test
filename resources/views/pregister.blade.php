@@ -30,11 +30,13 @@
                     @endif
                     </div>
 
-                    <!-- 会社名についてはまだDB作成していないのでDB対応次第セレクトボックスと連携
-                    -->
                     <div class="form-group">
-                    <label for="company_name">会社名</label>
-                    <input type="text" class="form-control" id="company_name" name="company_name" value="{{ old('company_name') }}">
+                    <label for="company_id">会社名</label>
+                    <select name="company_id">
+                    @foreach($companies as $company)
+                    <option value="{{ $company->id }}">{{ $company->company_name }}</option>
+                    @endforeach
+                    </select>
                     @if($errors->has('company_name'))
                         <p>{{ $errors->first('company_name') }}</p>
                     @endif
@@ -75,7 +77,9 @@
 
                     <button type="submit" class="btn btn-default">登録</button>
 
-                    </form>
+                    <a href="{{ route('plist') }}">戻る</a>
+                    
+                </form>
 
                 </div>
             </div>

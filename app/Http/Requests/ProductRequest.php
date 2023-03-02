@@ -25,7 +25,6 @@ class ProductRequest extends FormRequest
     {
         return [
             'product_name' => 'required',
-            'company_name' => 'required',
             'price' => 'required',
             'stock' => 'required',
             'comment' => 'nullable',
@@ -42,7 +41,6 @@ class ProductRequest extends FormRequest
     {
         return [
             'product_name' => '商品名',
-            'company_name' => '会社名',
             'price' => '価格',
             'stock' => '在庫数',
             'img_path' => '商品画像',
@@ -57,8 +55,7 @@ class ProductRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => ':商品名は必須項目です。',
-            'company_name' => ':会社名は必須項目です。',
+            'product_name' => ':商品名は必須項目です。',
             'price' => ':価格は必須項目です。',
             'stock' => ':在庫数は必須項目です。',
             'img_path' => ':商品画像は必須項目です。',

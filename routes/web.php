@@ -20,8 +20,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/plist', 'ProductController@list')->name('plist');
+
 /*
 Route::get('/register', 'ProductController@register')->name('register');
 */
-Route::get('/register', 'ProductController@showRegistForm')->name('register');
-Route::post('/register', 'ProductController@registSubmit')->name('submit');
+Route::get('/pregister', 'ProductController@showRegistForm')->name('pregister');
+Route::post('/pregister', 'ProductController@registSubmit')->name('submit');
+
+Route::get('/products/{id}', 'ProductController@show')->name('detail');

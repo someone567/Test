@@ -1,5 +1,6 @@
 @extends('layouts.app')
 <link rel="stylesheet" href="{{ asset('css/plist.css') }}">
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -13,18 +14,18 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    <a href="{{ route('register') }}">新規登録</a>
+                    <a href="{{ route('pregister') }}">新規登録</a>
                 </div>
                 <div class="links">
 <table>
     <thead>
         <tr>
             <th>ID</th>
-            <th>img_path</th>
-            <th>product_name</th>
-            <th>price</th>
-            <th>stock</th>
-            <th>company_id</th>
+            <th>商品画像</th>
+            <th>商品名</th>
+            <th>価格</th>
+            <th>在庫</th>
+            <th>メーカー</th>
         </tr>
     </thead>
     <tbody>
@@ -35,7 +36,8 @@
             <td>{{ $product->product_name }}</td>
             <td>{{ $product->price }}</td>
             <td>{{ $product->stock }}</td>
-            <td>{{ $product->company_id }}</td>
+            <td>{{ $product->company_name }}</td>
+            <td><a href="{{ route('detail', ['id' => $product->id]) }}"><button type="button" class="btn btn-detail">詳細</button></a></td>
         </tr>
     @endforeach
     </tbody>
@@ -45,4 +47,5 @@
         </div>
     </div>
 </div>
+
 @endsection

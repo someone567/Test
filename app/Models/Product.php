@@ -10,8 +10,7 @@ class Product extends Model
     public function getList()
     {
         // productsテーブルからデータを取得
-        $products = DB::table('products')->get();
-
+        $products = DB::table('products')->leftjoin('companies', 'company_id', '=', 'companies.id')->get();
         return $products;
     }
 
@@ -20,7 +19,7 @@ class Product extends Model
         // 登録処理
         DB::table('products')->insert([
             'product_name' => $data->product_name,
-            'company_name' => $data->company_name,
+            'company_id' => $data->company_id,
             'price' => $data->price,
             'stock' => $data->stock,
             'img_path' => $data->img_path,

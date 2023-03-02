@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Company;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\DB;
 
@@ -27,20 +28,16 @@ class ProductController extends Controller
         return view('plist', ['products' => $products]);
     }
 
-    /**
-     * 新規登録画面表示
-     */
-    public function register()
-    {
-        return view("register");
-    }
 
     /**
      * 商品登録ボタン押した後の動作
      */
     public function showRegistForm()
     {
-        return view('register');
+        $model = new Company();
+        $companies = $model->getList();
+
+        return view('pregister', ['companies' => $companies]);
     }
 
     public function registSubmit(ProductRequest $request)
@@ -55,12 +52,22 @@ class ProductController extends Controller
             $model->registProduct($request);
             DB::commit();
         } catch (\Exception $e) {
+            dd($e);
             DB::rollback();
             return back();
         }
 
-        // 処理が完了したらregisterにリダイレクト
-        return redirect(route('register'));
+        // 処理が完了したらp.registerにリダイレクト
+        return redirect(route('pregister'));
+    }
+
+    /**
+     * 詳細画面
+     */
+    public function show($id)
+    {
+        $products = Product::find($id);
+        return view('detail', ['products' => $products]);
     }
 
 }
