@@ -19,20 +19,23 @@
                         </div>
                     @endif
 
-                    <h3>商品ID</h3>
+                    @foreach ($products as $products)
+                    
+                    <h4>商品ID</h4>
                     <p>{{ $products->id }}</p>
-                    <h3>商品画像</h3>
+                    <h4>商品画像</h4>
                     <p>{{ $products->img_path }}</p>
-                    <h3>商品名</h3>
+                    <h4>商品名</h4>
                     <p>{{ $products->product_name }}</p>
-                    <h3>メーカー</h3>
+                    <h4>メーカー</h4>
                     <p>{{ $products->company_name }}</p>
-                    <h3>価格</h3>
+                    <h4>価格</h4>
                     <p>{{ $products->price }}</p>
-                    <h3>在庫数</h3>
+                    <h4>在庫数</h4>
                     <p>{{ $products->stock }}</p>
-                    <h3>コメント</h3>
+                    <h4>コメント</h4>
                     <p>{{ $products->comment }}</p>
+                    @endforeach
                 </div>
             </div>
         </div>
