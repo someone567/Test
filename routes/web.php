@@ -28,3 +28,12 @@ Route::get('/pregister', 'ProductController@showRegistForm')->name('pregister');
 Route::post('/pregister', 'ProductController@registSubmit')->name('submit');
 
 Route::get('/products/{id}', 'ProductController@show')->name('detail');
+
+/*
+削除ボタン
+*/
+Route::delete('/products/{id}', 'ProductController@destroy')->name('products.destroy');
+
+/*
+編集ボタン
+*/

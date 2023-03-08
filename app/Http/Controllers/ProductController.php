@@ -28,6 +28,16 @@ class ProductController extends Controller
         return view('plist', ['products' => $products]);
     }
 
+    /**
+     * 削除ボタンの動作
+     */
+    public function destroy($id)
+    {
+        $products = Product::findOrFail($id);
+        $products->delete();
+
+        return redirect()->route('plist');
+    }
 
     /**
      * 商品登録ボタン押した後の動作
@@ -74,5 +84,9 @@ class ProductController extends Controller
 
         return view('detail', compact('products'));
     }
+
+/**
+ * 編集画面
+ */
 
 }
