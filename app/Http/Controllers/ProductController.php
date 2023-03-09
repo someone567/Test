@@ -85,8 +85,17 @@ class ProductController extends Controller
         return view('detail', compact('products'));
     }
 
-/**
- * 編集画面
- */
+    /**
+     * 編集画面
+     */
+    public function edit($id)
+    {
+        $products = DB::table('products')
+            ->leftJoin('companies', 'products.company_id', '=', 'companies.id')
+            ->select('companies.*', 'products.*')
+            ->where('products.id', $id)
+            ->get();
 
+        return view('edit', compact('products'));
+    }
 }
