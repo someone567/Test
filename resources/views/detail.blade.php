@@ -36,8 +36,8 @@
                     <h4>コメント</h4>
                     <p>{{ $products->comment }}</p>
                     @endforeach
-
-                    <a href="{{ route('plist') }}">戻る</a>
+                    <td><a href="{{ route('edit', ['id'=>$products->id]) }}" class="btn btn-info">編集</a></td>
+                    <td><a href="{{ route('plist') }}">戻る</a></td>
                 </div>
             </div>
         </div>

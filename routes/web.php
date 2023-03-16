@@ -38,3 +38,4 @@ Route::delete('/products/{id}', 'ProductController@destroy')->name('products.des
 編集ボタン
 */
 Route::get('/edit/{id}', 'ProductController@edit')->name('edit');
+Route::post('/update/{id}', 'ProductController@update')->name('update');

@@ -94,8 +94,23 @@ class ProductController extends Controller
             ->leftJoin('companies', 'products.company_id', '=', 'companies.id')
             ->select('companies.*', 'products.*')
             ->where('products.id', $id)
-            ->get();
+            ->first();
 
         return view('edit', compact('products'));
     }
+
+    public function update(Request $request, $id)
+    {
+        $products = Product::find($id);
+        $products->product_name = $request->input('product_name');
+        $products->company_name = $request->input('company_name');
+        $products->price = $request->input('price');
+        $products->stock = $request->input('stock');
+        $products->comment = $request->input('comment');
+        $products->img_path = $request->input('img_path');
+        $products->save();
+
+        return redirect()->route('edit', $products->id);
+    }
+
 }
