@@ -35,7 +35,9 @@
                     <label for="company_id">会社名</label>
                     <select name="company_id">
                     @foreach($companies as $company)
-                    <option value="{{ $company->id }}">{{ $company->company_name }}</option>
+                      <option value="{{ $company->id }}" {{ $products->company_id == $company->id ? 'selected' : '' }}>
+                    {{ $company->company_name }}
+                      </option>
                     @endforeach
                     </select>
                     @if($errors->has('company_name'))
