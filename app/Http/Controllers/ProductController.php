@@ -45,14 +45,12 @@ class ProductController extends Controller
     public function showRegistForm()
     {
         $model = new Company();
-        $companies = $model->getList();
-
+        $companies = $model->getAll();
         return view('pregister', ['companies' => $companies]);
     }
 
     public function registSubmit(ProductRequest $request)
     {
-
         // トランザクション開始
         DB::beginTransaction();
 
@@ -60,9 +58,10 @@ class ProductController extends Controller
             // 登録処理呼び出し
             $model = new Product();
             $model->registProduct($request);
+
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
+            // phpMYadminでcommentをnull許容に変更必要
             DB::rollback();
             return back();
         }
