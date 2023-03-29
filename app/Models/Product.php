@@ -27,4 +27,8 @@ class Product extends Model
         ]);
     }
 
+    protected $fillable = [
+        'img_path',
+    ];
+
 }

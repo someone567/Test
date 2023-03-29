@@ -19,7 +19,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('submit') }}" method="post">
+                    <form action="{{ route('submit') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     
                     <div class="form-group">
@@ -72,7 +72,7 @@
                     -->
                     <div class="form-group2">
                     <label for="img_path">商品画像</label>
-                    <input type="text" class="form-control" id="img_path" name="img_path">
+                    <input type="file" class="form-control" id="img_path" name="img_path">
                     </div>
 
                     <button type="submit" class="btn btn-default">登録</button>

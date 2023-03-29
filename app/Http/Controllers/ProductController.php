@@ -70,6 +70,28 @@ class ProductController extends Controller
         return redirect(route('pregister'));
     }
 
+    public function store(Request $request)
+    {
+        $img = $request->file('image');
+        // 画像情報がセットされていれば、保存処理を実行
+        if (isset($img)) {
+            // storage > app > public > images配下に画像が保存される
+            $path = $img->store('images', 'public');
+            // store処理が実行できたらDBに保存処理を実行
+            if ($path) {
+                // DBに登録する処理
+                Product::create([
+                    'img_path' => $path,
+                ]);
+            }
+        }
+    }
+
+    public function create(Request $request)
+    {
+        return view('products.create');
+    }
+
     /**
      * 詳細画面
      */
