@@ -19,11 +19,11 @@ class Product extends Model
     {
         // 登録処理
         DB::table('products')->insert([
-            'product_name' => $data->product_name,
-            'company_id' => $data->company_id,
-            'price' => $data->price,
-            'stock' => $data->stock,
-            'img_path' => $data->img_path,
+            'product_name' => $data['product_name'],
+            'company_id' => $data['company_id'],
+            'price' => $data['price'],
+            'stock' => $data['stock'],
+            'img_path' => $data['img_path'],
         ]);
     }
 

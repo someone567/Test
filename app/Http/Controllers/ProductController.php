@@ -51,13 +51,17 @@ class ProductController extends Controller
 
     public function registSubmit(ProductRequest $request)
     {
+        $input = $request->all();
         // トランザクション開始
         DB::beginTransaction();
 
         try {
+
+            $input['imag_path'] = $input['img_path']->store('public/images');
+
             // 登録処理呼び出し
             $model = new Product();
-            $model->registProduct($request);
+            $model->registProduct($input);
 
             DB::commit();
         } catch (\Exception $e) {
@@ -72,11 +76,11 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $img = $request->file('image');
+        $file = $request->img_path;
         // 画像情報がセットされていれば、保存処理を実行
-        if (isset($img)) {
+        if (isset($file)) {
             // storage > app > public > images配下に画像が保存される
-            $path = $img->store('images', 'public');
+            $path = $file->store('public/images');
             // store処理が実行できたらDBに保存処理を実行
             if ($path) {
                 // DBに登録する処理
