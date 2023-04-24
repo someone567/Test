@@ -24,7 +24,9 @@ class ProductController extends Controller
         // インスタンス生成
         $model = new Product();
         $products = $model->getList();
-
+        foreach ($products as $product) {
+            $product->img_path = str_replace('public', 'storage', $product->img_path);
+        }
         return view('plist', ['products' => $products]);
     }
 
@@ -57,7 +59,7 @@ class ProductController extends Controller
 
         try {
 
-            $input['imag_path'] = $input['img_path']->store('public/images');
+            $input['img_path'] = $input['img_path']->store('public/images');
 
             // 登録処理呼び出し
             $model = new Product();
