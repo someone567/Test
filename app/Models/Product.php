@@ -31,4 +31,21 @@ class Product extends Model
         'img_path',
     ];
 
+    public function getDetail($id)
+    {
+        return DB::table('products')
+            ->leftJoin('companies', 'products.company_id', '=', 'companies.id')
+            ->select('companies.*', 'products.*')
+            ->where('products.id', $id)
+            ->get();
+    }
+
+    public function getEdit($id)
+    {
+        return DB::table('products')
+            ->leftJoin('companies', 'products.company_id', '=', 'companies.id')
+            ->select('companies.*', 'products.*')
+            ->where('products.id', $id)
+            ->first();
+    }
 }

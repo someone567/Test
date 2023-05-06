@@ -103,12 +103,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $products = DB::table('products')
-            ->leftJoin('companies', 'products.company_id', '=', 'companies.id')
-            ->select('companies.*', 'products.*')
-            ->where('products.id', $id)
-            ->get();
-
+        $model = new Product();
+        $products = $model->getDetail($id);
         return view('detail', compact('products'));
     }
 
@@ -117,18 +113,11 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $products = DB::table('products')
-            ->leftJoin('companies', 'products.company_id', '=', 'companies.id')
-            ->select('companies.*', 'products.*')
-            ->where('products.id', $id)
-            ->first();
-
-        $companies = DB::table('companies')->get();
-
-
+        $model = new Product();
+        $products = $model->getEdit($id);
+        $companies = Company::all();
         return view('edit', compact('products', 'companies'));
     }
-
     public function update(Request $request, $id)
     {
         $products = Product::find($id);
