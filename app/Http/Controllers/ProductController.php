@@ -19,15 +19,22 @@ class ProductController extends Controller
     /**
      * 商品一覧画面表示
      */
-    public function list()
+    public function list(Request $request)
     {
-        // インスタンス生成
+        $productName = $request->input('product_name');
+        $companyId = $request->input('company_id');
+
         $model = new Product();
-        $products = $model->getList();
+        $products = $model->getList($productName, $companyId);
+
         foreach ($products as $product) {
             $product->img_path = str_replace('public', 'storage', $product->img_path);
         }
-        return view('plist', ['products' => $products]);
+
+        $companyModel = new Company();
+        $companies = $companyModel->getAll();
+
+        return view('plist', compact('products', 'companies'));
     }
 
     /**

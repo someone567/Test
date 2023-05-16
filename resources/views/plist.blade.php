@@ -16,45 +16,67 @@
                     @endif
                     <a href="{{ route('pregister') }}">新規登録</a>
                 </div>
-                <div class="links">
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>商品画像</th>
-            <th>商品名</th>
-            <th>価格</th>
-            <th>在庫</th>
-            <th>メーカー</th>
-            <th>詳細</th>
-            <th>削除</th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach ($products as $product)
-        <tr>
-            <td>{{ $product->id }}</td>
-            <td><img src="{{ asset($product->img_path) }}" width="150" height="100"></td>
-            <td>{{ $product->product_name }}</td>
-            <td>{{ $product->price }}</td>
-            <td>{{ $product->stock }}</td>
-            <td>{{ $product->company_name }}</td>
-            <td><a href="{{ route('detail', ['id' => $product->id]) }}"><button type="button" class="btn btn-detail">詳細</button></a></td>
-            <td>
-            <form action="{{ route('products.destroy', $product->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger" onclick="return confirm('本当に削除しますか？')">削除</button>
-            </form>
-            </form>
-        </tr>
-    @endforeach
-    </tbody>
-</table>
-</div>
-            </div>
+
+                <!-- 検索フォーム -->
+                <form action="{{ route('plist') }}" method="GET">
+        <div class="form-group">
+            <label for="product_name">商品名:</label>
+            <input type="text" id="product_name" name="product_name" class="form-control" value="{{ request()->input('product_name') }}">
         </div>
+        <div class="form-group">
+            <label for="company_id">メーカー:</label>
+            <select id="company_id" name="company_id" class="form-control">
+                <option value="">-- 選択してください --</option>
+                @foreach ($companies as $company)
+                <option value="{{ $company->id }}" {{ request()->input('company_id') == $company->id ? 'selected' : '' }}>
+                    {{ $company->company_name }}
+                </option>
+                @endforeach
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">検索</button>
+    </form>
+
+
+    <div id="product-list" class="links">
+        <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>商品画像</th>
+                <th>商品名</th>
+                <th>価格</th>
+                <th>在庫</th>
+                <th>メーカー</th>
+                <th>詳細</th>
+                <th>削除</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($products as $product)
+                <tr>
+                    <td>{{ $product->id }}</td>
+                    <td><img src="{{ asset($product->img_path) }}" width="150" height="100"></td>
+                    <td>{{ $product->product_name }}</td>
+                    <td>{{ $product->price }}</td>
+                    <td>{{ $product->stock }}</td>
+                    <td>{{ $product->company_name }}</td>
+                    <td>
+                        <a href="{{ route('detail', ['id' => $product->id]) }}">
+                            <button type="button" class="btn btn-detail">詳細</button>
+                        </a>
+                    </td>
+                    <td>
+                        <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('本当に削除しますか？')">削除</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+        </table>
     </div>
 </div>
-
 @endsection

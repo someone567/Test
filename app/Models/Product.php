@@ -7,12 +7,20 @@ use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
-    public function getList()
+    public function getList($productName = null, $companyId = null)
     {
-        // productsテーブルからデータを取得
-        $products = DB::table('products')->select('products.id', 'img_path', 'product_name', 'price', 'stock', 'company_name')
-            ->leftjoin('companies', 'company_id', '=', 'companies.id')->get();
-        return $products;
+        $query = DB::table('products')
+            ->leftJoin('companies', 'products.company_id', '=', 'companies.id')
+            ->select('companies.*', 'products.*');
+
+        if ($productName) {
+            $query->where('products.product_name', 'LIKE', '%' . $productName . '%');
+        }
+
+        if ($companyId) {
+            $query->where('companies.id', $companyId);
+        }
+        return $query->get();
     }
 
     public function registProduct($data)
