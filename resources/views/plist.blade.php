@@ -18,25 +18,40 @@
                 </div>
 
                 <!-- 検索フォーム -->
-                <form action="{{ route('plist') }}" method="GET">
-        <div class="form-group">
-            <label for="product_name">商品名:</label>
-            <input type="text" id="product_name" name="product_name" class="form-control" value="{{ request()->input('product_name') }}">
-        </div>
-        <div class="form-group">
-            <label for="company_id">メーカー:</label>
-            <select id="company_id" name="company_id" class="form-control">
-                <option value="">-- 選択してください --</option>
-                @foreach ($companies as $company)
+<form action="{{ route('plist') }}" method="GET">
+    <div class="form-group">
+        <label for="product_name">商品名:</label>
+        <input type="text" id="product_name" name="product_name" class="form-control" value="{{ request()->input('product_name') }}">
+    </div>
+    <div class="form-group">
+        <label for="company_id">メーカー:</label>
+        <select id="company_id" name="company_id" class="form-control">
+            <option value="">-- 選択してください --</option>
+            @foreach ($companies as $company)
                 <option value="{{ $company->id }}" {{ request()->input('company_id') == $company->id ? 'selected' : '' }}>
                     {{ $company->company_name }}
                 </option>
-                @endforeach
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">検索</button>
-    </form>
-
+            @endforeach
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="min_price">最低価格:</label>
+        <input type="number" id="min_price" name="min_price" class="form-control" value="{{ request()->input('min_price') }}">
+    </div>
+    <div class="form-group">
+        <label for="max_price">最高価格:</label>
+        <input type="number" id="max_price" name="max_price" class="form-control" value="{{ request()->input('max_price') }}">
+    </div>
+    <div class="form-group">
+        <label for="min_stock">最低在庫数:</label>
+        <input type="number" id="min_stock" name="min_stock" class="form-control" value="{{ request()->input('min_stock') }}">
+    </div>
+    <div class="form-group">
+        <label for="max_stock">最高在庫数:</label>
+        <input type="number" id="max_stock" name="max_stock" class="form-control" value="{{ request()->input('max_stock') }}">
+    </div>
+    <button type="submit" class="btn btn-primary">検索</button>
+</form>
 
     <div id="product-list" class="links">
         <table>
@@ -52,8 +67,10 @@
                 <th>削除</th>
             </tr>
         </thead>
+
         <tbody>
             @foreach ($products as $product)
+           
                 <tr>
                     <td>{{ $product->id }}</td>
                     <td><img src="{{ asset($product->img_path) }}" width="150" height="100"></td>

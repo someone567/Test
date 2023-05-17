@@ -18,26 +18,41 @@
                 </div>
 
                 <!-- 検索フォーム -->
-                <form action="<?php echo e(route('plist')); ?>" method="GET">
-        <div class="form-group">
-            <label for="product_name">商品名:</label>
-            <input type="text" id="product_name" name="product_name" class="form-control" value="<?php echo e(request()->input('product_name')); ?>">
-        </div>
-        <div class="form-group">
-            <label for="company_id">メーカー:</label>
-            <select id="company_id" name="company_id" class="form-control">
-                <option value="">-- 選択してください --</option>
-                <?php $__currentLoopData = $companies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $company): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<form action="<?php echo e(route('plist')); ?>" method="GET">
+    <div class="form-group">
+        <label for="product_name">商品名:</label>
+        <input type="text" id="product_name" name="product_name" class="form-control" value="<?php echo e(request()->input('product_name')); ?>">
+    </div>
+    <div class="form-group">
+        <label for="company_id">メーカー:</label>
+        <select id="company_id" name="company_id" class="form-control">
+            <option value="">-- 選択してください --</option>
+            <?php $__currentLoopData = $companies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $company): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <option value="<?php echo e($company->id); ?>" <?php echo e(request()->input('company_id') == $company->id ? 'selected' : ''); ?>>
                     <?php echo e($company->company_name); ?>
 
                 </option>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">検索</button>
-    </form>
-
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="min_price">最低価格:</label>
+        <input type="number" id="min_price" name="min_price" class="form-control" value="<?php echo e(request()->input('min_price')); ?>">
+    </div>
+    <div class="form-group">
+        <label for="max_price">最高価格:</label>
+        <input type="number" id="max_price" name="max_price" class="form-control" value="<?php echo e(request()->input('max_price')); ?>">
+    </div>
+    <div class="form-group">
+        <label for="min_stock">最低在庫数:</label>
+        <input type="number" id="min_stock" name="min_stock" class="form-control" value="<?php echo e(request()->input('min_stock')); ?>">
+    </div>
+    <div class="form-group">
+        <label for="max_stock">最高在庫数:</label>
+        <input type="number" id="max_stock" name="max_stock" class="form-control" value="<?php echo e(request()->input('max_stock')); ?>">
+    </div>
+    <button type="submit" class="btn btn-primary">検索</button>
+</form>
 
     <div id="product-list" class="links">
         <table>
@@ -53,8 +68,10 @@
                 <th>削除</th>
             </tr>
         </thead>
+
         <tbody>
             <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+           
                 <tr>
                     <td><?php echo e($product->id); ?></td>
                     <td><img src="<?php echo e(asset($product->img_path)); ?>" width="150" height="100"></td>

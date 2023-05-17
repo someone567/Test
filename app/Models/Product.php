@@ -7,21 +7,41 @@ use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
-    public function getList($productName = null, $companyId = null)
+    public function getList($conditions)
     {
-        $query = DB::table('products')
-            ->leftJoin('companies', 'products.company_id', '=', 'companies.id')
-            ->select('companies.*', 'products.*');
+        $query = $this->query();
 
-        if ($productName) {
-            $query->where('products.product_name', 'LIKE', '%' . $productName . '%');
+        // 商品名の検索
+        if ($conditions['product_name']) {
+            $query->where('product_name', 'LIKE', '%' . $conditions['product_name'] . '%');
         }
 
-        if ($companyId) {
-            $query->where('companies.id', $companyId);
+        // メーカーの検索
+        if ($conditions['company_id']) {
+            $query->where('company_id', $conditions['company_id']);
         }
-        return $query->get();
+
+        // 価格の範囲検索
+        if ($conditions['min_price']) {
+            $query->where('price', '>=', $conditions['min_price']);
+        }
+        if ($conditions['max_price']) {
+            $query->where('price', '<=', $conditions['max_price']);
+        }
+
+        // 在庫数の範囲検索
+        if ($conditions['min_stock']) {
+            $query->where('stock', '>=', $conditions['min_stock']);
+        }
+        if ($conditions['max_stock']) {
+            $query->where('stock', '<=', $conditions['max_stock']);
+        }
+
+        return $query->leftJoin('companies', 'products.company_id', '=', 'companies.id') // メーカー情報を結合
+            ->select('products.*', 'companies.company_name') // 必要なカラムを選択
+            ->get();
     }
+
 
     public function registProduct($data)
     {

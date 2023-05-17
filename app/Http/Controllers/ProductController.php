@@ -21,21 +21,36 @@ class ProductController extends Controller
      */
     public function list(Request $request)
     {
+        $model = new Product();
+
+        // フォームからの入力を取得
         $productName = $request->input('product_name');
         $companyId = $request->input('company_id');
+        $minPrice = $request->input('min_price');
+        $maxPrice = $request->input('max_price');
+        $minStock = $request->input('min_stock');
+        $maxStock = $request->input('max_stock');
 
-        $model = new Product();
-        $products = $model->getList($productName, $companyId);
+        // 検索条件を配列にまとめる
+        $conditions = [
+            'product_name' => $productName,
+            'company_id' => $companyId,
+            'min_price' => $minPrice,
+            'max_price' => $maxPrice,
+            'min_stock' => $minStock,
+            'max_stock' => $maxStock,
+        ];
 
-        foreach ($products as $product) {
-            $product->img_path = str_replace('public', 'storage', $product->img_path);
-        }
+        // 検索結果を取得
+        $products = $model->getList($conditions);
 
-        $companyModel = new Company();
-        $companies = $companyModel->getAll();
+        // メーカー一覧を取得
+        $companies = (new Company())->getAll();
+
 
         return view('plist', compact('products', 'companies'));
     }
+
 
     /**
      * 削除ボタンの動作
