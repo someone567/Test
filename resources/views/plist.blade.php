@@ -1,7 +1,6 @@
 @extends('layouts.app')
 <link rel="stylesheet" href="{{ asset('css/plist.css') }}">
 
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -55,7 +54,7 @@
 </form>
 
     <div id="product-list" class="links">
-        <table>
+    <table id="fav-table" class="table table-bordered">
         <thead>
             <tr>
                 <th>ID</th>

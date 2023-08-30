@@ -29,3 +29,7 @@ $(document).ready(function () {
         });
     });
 });
+
+$(document).ready(function () {
+    $('#fav-table').tablesorter();
+});
