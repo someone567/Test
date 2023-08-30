@@ -1,6 +1,7 @@
 @extends('layouts.app')
 <link rel="stylesheet" href="{{ asset('css/plist.css') }}">
 
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -87,7 +88,7 @@
                         <form action="{{ route('products.destroy', $product->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('本当に削除しますか？')">削除</button>
+                            <button type="submit" class="btn btn-danger" data-delete-id="{{$product->id}}" onclick="return confirm('本当に削除しますか？')">削除</button>
                         </form>
                     </td>
                 </tr>

@@ -60,7 +60,7 @@ class ProductController extends Controller
         $products = Product::findOrFail($id);
         $products->delete();
 
-        return redirect()->route('plist');
+        return redirect()->route('plist'); // jsの.readyと.click削除の場合、この行削除すると選択したIDにリダイレクト
     }
 
     /**

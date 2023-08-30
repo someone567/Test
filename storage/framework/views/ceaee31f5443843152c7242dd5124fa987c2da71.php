@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="<?php echo e(asset('css/plist.css')); ?>">
 
+
 <?php $__env->startSection('content'); ?>
 <div class="container">
     <div class="row justify-content-center">
@@ -88,7 +89,7 @@
                         <form action="<?php echo e(route('products.destroy', $product->id)); ?>" method="POST">
                             <?php echo csrf_field(); ?>
                             <?php echo method_field('DELETE'); ?>
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('本当に削除しますか？')">削除</button>
+                            <button type="submit" class="btn btn-danger" data-delete-id="<?php echo e($product->id); ?>" onclick="return confirm('本当に削除しますか？')">削除</button>
                         </form>
                     </td>
                 </tr>
