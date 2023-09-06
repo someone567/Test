@@ -18,7 +18,7 @@
                 </div>
 
                 <!-- 検索フォーム -->
-<form action="<?php echo e(route('plist')); ?>" method="GET">
+<form id="search-form" action="<?php echo e(route('plist')); ?>" method="GET">
     <div class="form-group">
         <label for="product_name">商品名:</label>
         <input type="text" id="product_name" name="product_name" class="form-control" value="<?php echo e(request()->input('product_name')); ?>">

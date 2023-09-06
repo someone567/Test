@@ -1,5 +1,4 @@
-//このままだと検証画面のネットワークのレスポンスでエラーが検知
-//.readyと.click消した場合、以下の記述あると削除押した後に更新されて削除となる、同期処理
+
 $(document).ready(function () {
     // 削除ボタンのイベントリスナーを追加
     $('.btn-danger').click(function (event) {
@@ -32,4 +31,25 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $('#fav-table').tablesorter();
+});
+
+//検索機能
+$(document).ready(function () {
+    // 検索ボタンのクリックイベントを追加
+    $('#search-form').on('submit', function (e) {
+        e.preventDefault();
+        var formData = $(this).serialize();
+        $.ajax({
+            type: 'GET',
+            url: '/plist',
+            data: formData,
+            success: function (data) {
+                // 取得したHTMLを表示する要素に加える
+                $('#product-list').html(data);
+            },
+            error: function (error) {
+                console.log('Error:', error);
+            }
+        });
+    });
 });
