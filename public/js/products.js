@@ -41,7 +41,7 @@ $(document).ready(function () {
         var formData = $(this).serialize();
         $.ajax({
             type: 'GET',
-            url: '/plist',
+            url: 'plist',
             data: formData,
             success: function (data) {
                 // 取得したHTMLを表示する要素に加える
