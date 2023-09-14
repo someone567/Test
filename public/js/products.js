@@ -45,7 +45,7 @@ $(document).ready(function () {
             data: formData,
             success: function (data) {
                 // 取得したHTMLを表示する要素に加える
-                $('#product-list').html(data);
+                $('#search-results').html(data);
             },
             error: function (error) {
                 console.log('Error:', error);
