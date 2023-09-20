@@ -54,7 +54,8 @@
     <button type="submit" class="btn btn-primary">検索</button>
 </form>
 
-    <div id="product-list" class="links">
+<div id="search-results">
+<div id="product-list" class="links">
     <table id="fav-table" class="table table-bordered">
         <thead>
             <tr>
@@ -94,8 +95,8 @@
                 </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </tbody>
-        </table>
-    </div>
+    </table>
+</div>
 </div>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\MANP\MAMP\htdocs\practice\resources\views/plist.blade.php ENDPATH**/ ?>

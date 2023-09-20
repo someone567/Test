@@ -53,7 +53,8 @@
     <button type="submit" class="btn btn-primary">検索</button>
 </form>
 
-    <div id="product-list" class="links">
+<div id="search-results">
+<div id="product-list" class="links">
     <table id="fav-table" class="table table-bordered">
         <thead>
             <tr>
@@ -93,7 +94,7 @@
                 </tr>
             @endforeach
         </tbody>
-        </table>
-    </div>
+    </table>
+</div>
 </div>
 @endsection

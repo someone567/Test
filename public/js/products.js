@@ -44,8 +44,9 @@ $(document).ready(function () {
             url: 'plist',
             data: formData,
             success: function (data) {
-                // 取得したHTMLを表示する要素に加える
-                $('#search-results').html(data);
+                // 取得したHTMLから特定の部分を抽出して表示する要素に追加
+                var searchResults = $(data).find('#search-results');
+                $('#search-results').html(searchResults);
             },
             error: function (error) {
                 console.log('Error:', error);
